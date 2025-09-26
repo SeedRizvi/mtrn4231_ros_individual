@@ -26,9 +26,11 @@ class MinimalPublisher : public rclcpp::Node
     void timer_callback()
     {
       auto message = custom_msgs::msg::Command();
-      message.command_id = 2;
       message.nargs = 2;
+      message.command_id = 2;
       message.args = {"debug", "full"};
+      // message.command_id = 9;
+      // message.args = {"this ", "isnt fake"};
       std::string args_str;
       for (size_t i = 0; i < message.nargs; ++i) {
           if (i > 0) args_str += ", ";
