@@ -1,27 +1,29 @@
 #include <memory>
 
 #include "rclcpp/rclcpp.hpp"
-#include "custom_msgs/msg/command.hpp"     
+#include "custom_msgs/msg/command.hpp"
 #include "commands.hpp"
 using std::placeholders::_1;
 
 class MinimalSubscriber : public rclcpp::Node
 {
-  public:
+public:
     MinimalSubscriber()
-    : Node("Control_Recv")
+        : Node("Control_Recv")
     {
-      subscription_ = this->create_subscription<custom_msgs::msg::Command>(
-      "supervisor_cmds", 10, std::bind(&MinimalSubscriber::topic_callback, this, _1));
+        subscription_ = this->create_subscription<custom_msgs::msg::Command>(
+            "supervisor_cmds", 10, std::bind(&MinimalSubscriber::topic_callback, this, _1));
     }
 
-  private:
-    void topic_callback(const custom_msgs::msg::Command & msg) const
+private:
+    void topic_callback(const custom_msgs::msg::Command &msg) const
     {
 
         std::string args_str;
-        for (size_t i = 0; i < msg.nargs; ++i) {
-            if (i > 0) args_str += ", ";
+        for (size_t i = 0; i < msg.nargs; ++i)
+        {
+            if (i > 0)
+                args_str += ", ";
             args_str += msg.args[i];
         }
         RCLCPP_INFO(this->get_logger(), "Supervisor Cmd ID: '%ld', %u args: [%s]", msg.command_id, msg.nargs, args_str.c_str());
@@ -50,10 +52,10 @@ class MinimalSubscriber : public rclcpp::Node
     rclcpp::Subscription<custom_msgs::msg::Command>::SharedPtr subscription_;
 };
 
-int main(int argc, char * argv[])
+int main(int argc, char *argv[])
 {
-  rclcpp::init(argc, argv);
-  rclcpp::spin(std::make_shared<MinimalSubscriber>());
-  rclcpp::shutdown();
-  return 0;
+    rclcpp::init(argc, argv);
+    rclcpp::spin(std::make_shared<MinimalSubscriber>());
+    rclcpp::shutdown();
+    return 0;
 }
