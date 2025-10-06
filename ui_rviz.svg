@@ -3,81 +3,108 @@
 
   <rect width="800" height="80" fill="#2c3e50"/>
   <text x="400" y="35" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white" text-anchor="middle">Apple Picking Robot</text>
-  <text x="400" y="60" font-family="Arial, sans-serif" font-size="16" fill="#ecf0f1" text-anchor="middle">RViz Visualization Interface</text>
+  <text x="400" y="60" font-family="Arial, sans-serif" font-size="16" fill="#ecf0f1" text-anchor="middle">RViz Visualisation Interface</text>
 
   <!-- RViz Main Viewport -->
-  <rect x="40" y="110" width="520" height="380" rx="10" fill="white" stroke="#bdc3c7" stroke-width="2"/>
-  <text x="60" y="140" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#2c3e50">3D Visualization Viewport</text>
+  <rect x="20" y="95" width="540" height="410" rx="10" fill="white" stroke="#bdc3c7" stroke-width="2"/>
+  <text x="35" y="120" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2c3e50">3D Visualisation Viewport</text>
 
   <!-- Placeholder for RViz content -->
-  <rect x="60" y="160" width="480" height="310" rx="5" fill="#ecf0f1" stroke="#95a5a6" stroke-width="1" stroke-dasharray="5,5"/>
-  <text x="300" y="315" font-family="Arial, sans-serif" font-size="18" fill="#7f8c8d" text-anchor="middle">RViz 3D Scene</text>
+  <rect x="35" y="135" width="510" height="355" rx="5" fill="#ecf0f1" stroke="#95a5a6" stroke-width="1" stroke-dasharray="5,5"/>
+  <text x="290" y="315" font-family="Arial, sans-serif" font-size="18" fill="#7f8c8d" text-anchor="middle">RViz 3D Scene</text>
 
-  <!-- TF2 Tree Visualization -->
-  <rect x="580" y="110" width="180" height="380" rx="10" fill="white" stroke="#bdc3c7" stroke-width="2"/>
-  <text x="600" y="140" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2c3e50">TF2 Tree</text>
+  <!-- TF2 Tree Visualisation -->
+  <rect x="575" y="95" width="210" height="410" rx="10" fill="white" stroke="#bdc3c7" stroke-width="2"/>
+  <text x="590" y="120" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2c3e50">TF2 Tree</text>
 
-  <!-- TF2 Tree Structure -->
+  <!-- Apple Detection TF Chain -->
   <g>
-    <!-- Base Link -->
-    <rect x="625" y="170" width="90" height="30" rx="4" fill="#34495e"/>
-    <text x="670" y="190" font-family="Arial, sans-serif" font-size="11" fill="white" text-anchor="middle">base_link</text>
+    <text x="595" y="138" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#2c3e50">Apple Detection TF</text>
+    
+    <!-- camera_link -->
+    <rect x="630" y="145" width="85" height="26" rx="4" fill="#16a085"/>
+    <text x="672.5" y="162" font-family="Arial, sans-serif" font-size="10" fill="white" text-anchor="middle">camera_link</text>
+    
+    <!-- Arrow down -->
+    <line x1="672.5" y1="171" x2="672.5" y2="183" stroke="#95a5a6" stroke-width="2"/>
+    <polygon points="672.5,183 669.5,179 675.5,179" fill="#95a5a6"/>
+    
+    <!-- base_link -->
+    <rect x="630" y="183" width="85" height="26" rx="4" fill="#34495e"/>
+    <text x="672.5" y="200" font-family="Arial, sans-serif" font-size="10" fill="white" text-anchor="middle">base_link</text>
+    
+    <!-- Arrow down -->
+    <line x1="672.5" y1="209" x2="672.5" y2="221" stroke="#95a5a6" stroke-width="2"/>
+    <polygon points="672.5,221 669.5,217 675.5,217" fill="#95a5a6"/>
+    
+    <!-- orchard_map -->
+    <rect x="622" y="221" width="101" height="26" rx="4" fill="#3498db"/>
+    <text x="672.5" y="238" font-family="Arial, sans-serif" font-size="10" fill="white" text-anchor="middle">orchard_map</text>
+    
+    <!-- Arrow down -->
+    <line x1="672.5" y1="247" x2="672.5" y2="259" stroke="#95a5a6" stroke-width="2"/>
+    <polygon points="672.5,259 669.5,255 675.5,255" fill="#95a5a6"/>
+    
+    <!-- apple_x -->
+    <rect x="630" y="259" width="85" height="26" rx="4" fill="#e74c3c"/>
+    <text x="672.5" y="276" font-family="Arial, sans-serif" font-size="10" fill="white" text-anchor="middle">apple_x</text>
+  </g>
 
-    <!-- Mobile Base -->
-    <rect x="600" y="220" width="80" height="25" rx="3" fill="#3498db"/>
-    <text x="640" y="237" font-family="Arial, sans-serif" font-size="10" fill="white" text-anchor="middle">mobile_base</text>
-
-    <!-- Robot Arm -->
-    <rect x="690" y="220" width="70" height="25" rx="3" fill="#9b59b6"/>
-    <text x="725" y="237" font-family="Arial, sans-serif" font-size="10" fill="white" text-anchor="middle">arm_base</text>
-
-    <!-- Gripper -->
-    <rect x="690" y="260" width="70" height="25" rx="3" fill="#27ae60"/>
-    <text x="725" y="277" font-family="Arial, sans-serif" font-size="10" fill="white" text-anchor="middle">gripper</text>
-
-    <!-- Camera -->
-    <rect x="610" y="300" width="70" height="25" rx="3" fill="#16a085"/>
-    <text x="645" y="317" font-family="Arial, sans-serif" font-size="10" fill="white" text-anchor="middle">camera</text>
-
-    <!-- Apple Marker -->
-    <rect x="600" y="340" width="80" height="25" rx="3" fill="#e74c3c"/>
-    <text x="640" y="357" font-family="Arial, sans-serif" font-size="10" fill="white" text-anchor="middle">apple_marker</text>
-
-    <!-- Basket -->
-    <rect x="690" y="340" width="70" height="25" rx="3" fill="#f39c12"/>
-    <text x="725" y="357" font-family="Arial, sans-serif" font-size="10" fill="white" text-anchor="middle">basket</text>
-
-    <!-- Connection lines -->
-    <line x1="670" y1="200" x2="640" y2="220" stroke="#95a5a6" stroke-width="2"/>
-    <line x1="670" y1="200" x2="725" y2="220" stroke="#95a5a6" stroke-width="2"/>
-    <line x1="725" y1="245" x2="725" y2="260" stroke="#95a5a6" stroke-width="2"/>
-    <line x1="670" y1="200" x2="645" y2="300" stroke="#95a5a6" stroke-width="2"/>
-    <line x1="640" y1="245" x2="640" y2="340" stroke="#95a5a6" stroke-width="2"/>
-    <line x1="725" y1="285" x2="725" y2="340" stroke="#95a5a6" stroke-width="2"/>
+  <!-- Gripper Picking TF Chain -->
+  <g>
+    <text x="595" y="318" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#2c3e50">Gripper Picking TF</text>
+    
+    <!-- orchard_map -->
+    <rect x="622" y="325" width="101" height="26" rx="4" fill="#3498db"/>
+    <text x="672.5" y="342" font-family="Arial, sans-serif" font-size="10" fill="white" text-anchor="middle">orchard_map</text>
+    
+    <!-- Arrow down -->
+    <line x1="672.5" y1="351" x2="672.5" y2="363" stroke="#95a5a6" stroke-width="2"/>
+    <polygon points="672.5,363 669.5,359 675.5,359" fill="#95a5a6"/>
+    
+    <!-- apple_x -->
+    <rect x="630" y="363" width="85" height="26" rx="4" fill="#e74c3c"/>
+    <text x="672.5" y="380" font-family="Arial, sans-serif" font-size="10" fill="white" text-anchor="middle">apple_x</text>
+    
+    <!-- Arrow down -->
+    <line x1="672.5" y1="389" x2="672.5" y2="401" stroke="#95a5a6" stroke-width="2"/>
+    <polygon points="672.5,401 669.5,397 675.5,397" fill="#95a5a6"/>
+    
+    <!-- base_link -->
+    <rect x="630" y="401" width="85" height="26" rx="4" fill="#34495e"/>
+    <text x="672.5" y="418" font-family="Arial, sans-serif" font-size="10" fill="white" text-anchor="middle">base_link</text>
+    
+    <!-- Arrow down -->
+    <line x1="672.5" y1="427" x2="672.5" y2="439" stroke="#95a5a6" stroke-width="2"/>
+    <polygon points="672.5,439 669.5,435 675.5,435" fill="#95a5a6"/>
+    
+    <!-- gripper -->
+    <rect x="630" y="439" width="85" height="26" rx="4" fill="#27ae60"/>
+    <text x="672.5" y="456" font-family="Arial, sans-serif" font-size="10" fill="white" text-anchor="middle">gripper</text>
   </g>
 
   <!-- RViz Controls -->
-  <rect x="40" y="510" width="720" height="70" rx="10" fill="white" stroke="#bdc3c7" stroke-width="2"/>
-  <text x="60" y="535" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2c3e50">Visualization Controls</text>
+  <rect x="20" y="520" width="765" height="65" rx="10" fill="white" stroke="#bdc3c7" stroke-width="2"/>
+  <text x="35" y="542" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2c3e50">Visualisation Controls</text>
 
   <!-- Control buttons -->
   <g>
-    <rect x="60" y="545" width="100" height="25" rx="4" fill="#3498db" stroke="#2980b9" stroke-width="1" cursor="pointer"/>
-    <text x="110" y="562" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">Reset View</text>
+    <rect x="35" y="552" width="110" height="25" rx="4" fill="#3498db" stroke="#2980b9" stroke-width="1" cursor="pointer"/>
+    <text x="90" y="569" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">Reset View</text>
 
-    <rect x="170" y="545" width="100" height="25" rx="4" fill="#27ae60" stroke="#229954" stroke-width="1" cursor="pointer"/>
-    <text x="220" y="562" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">Camera View</text>
+    <rect x="155" y="552" width="110" height="25" rx="4" fill="#27ae60" stroke="#229954" stroke-width="1" cursor="pointer"/>
+    <text x="210" y="569" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">Camera View</text>
 
-    <rect x="280" y="545" width="100" height="25" rx="4" fill="#9b59b6" stroke="#8e44ad" stroke-width="1" cursor="pointer"/>
-    <text x="330" y="562" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">Toggle TF</text>
+    <rect x="275" y="552" width="110" height="25" rx="4" fill="#9b59b6" stroke="#8e44ad" stroke-width="1" cursor="pointer"/>
+    <text x="330" y="569" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">Toggle TF</text>
 
-    <rect x="390" y="545" width="100" height="25" rx="4" fill="#e74c3c" stroke="#c0392b" stroke-width="1" cursor="pointer"/>
-    <text x="440" y="562" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">Clear Markers</text>
+    <rect x="395" y="552" width="110" height="25" rx="4" fill="#e74c3c" stroke="#c0392b" stroke-width="1" cursor="pointer"/>
+    <text x="450" y="569" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">Clear Markers</text>
 
-    <rect x="500" y="545" width="100" height="25" rx="4" fill="#f39c12" stroke="#d68910" stroke-width="1" cursor="pointer"/>
-    <text x="550" y="562" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">Save Config</text>
+    <rect x="515" y="552" width="110" height="25" rx="4" fill="#f39c12" stroke="#d68910" stroke-width="1" cursor="pointer"/>
+    <text x="570" y="569" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">Save Config</text>
 
-    <rect x="610" y="545" width="100" height="25" rx="4" fill="#16a085" stroke="#138d75" stroke-width="1" cursor="pointer"/>
-    <text x="660" y="562" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">Screenshot</text>
+    <rect x="635" y="552" width="110" height="25" rx="4" fill="#16a085" stroke="#138d75" stroke-width="1" cursor="pointer"/>
+    <text x="690" y="569" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">Screenshot</text>
   </g>
 </svg>
