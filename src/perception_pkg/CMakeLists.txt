@@ -8,14 +8,13 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
-find_package(std_msgs REQUIRED)
 find_package(custom_msgs REQUIRED)
 
-add_executable(service_handler src/service_handler.cpp)
-ament_target_dependencies(service_handler rclcpp std_msgs custom_msgs)
+add_executable(perception_server src/server.cpp)
+ament_target_dependencies(perception_server rclcpp custom_msgs)
 
 install(TARGETS
-  service_handler
+  perception_server
   DESTINATION lib/${PROJECT_NAME})
 
 if(BUILD_TESTING)

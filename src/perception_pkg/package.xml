@@ -3,7 +3,7 @@
 <package format="3">
   <name>perception_pkg</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
+  <description>Basic apple perception using OpenCV and Marker Generator nodes</description>
   <maintainer email="syedasadrazarizvi1@gmail.com">asad</maintainer>
   <license>Apache-2.0</license>
 

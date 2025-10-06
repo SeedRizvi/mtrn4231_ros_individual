@@ -6,8 +6,8 @@
 void start_perception(const std::shared_ptr<custom_msgs::srv::StartPerception::Request> request,
                       std::shared_ptr<custom_msgs::srv::StartPerception::Response> response)
 {
-    response->success = true;
-    response->message = "Perception started";
+    response->success = (request->start) ? true : false;
+    response->message = "Perception service started";
     RCLCPP_INFO(rclcpp::get_logger("rclcpp"), "Incoming request: start=%d",
                 request->start);
     RCLCPP_INFO(rclcpp::get_logger("rclcpp"), "sending back response: [%d]", response->success);

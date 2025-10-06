@@ -14,6 +14,9 @@ find_package(custom_msgs REQUIRED)
 add_executable(supervisor_sub src/supervisor_sub.cpp)
 ament_target_dependencies(supervisor_sub rclcpp std_msgs custom_msgs)
 
+add_executable(perception_client src/perception_client.cpp)
+ament_target_dependencies(perception_client rclcpp custom_msgs)
+
 target_include_directories(supervisor_sub PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/${PROJECT_NAME}>
   $<INSTALL_INTERFACE:include>
@@ -21,13 +24,13 @@ target_include_directories(supervisor_sub PUBLIC
 
 install(TARGETS
   supervisor_sub
+  perception_client
   DESTINATION lib/${PROJECT_NAME})
 
 install(DIRECTORY include/
   DESTINATION share/${PROJECT_NAME}
   PATTERN "*.hpp"
   PATTERN "*.h"
-  # Add other patterns for specific header file extensions if needed
 )
 
 if(BUILD_TESTING)
