@@ -2,6 +2,7 @@
 
 #include "rclcpp/rclcpp.hpp"
 #include "custom_msgs/msg/command.hpp"
+#include "custom_msgs/srv/start_perception.hpp"
 #include "commands.hpp"
 using std::placeholders::_1;
 
@@ -16,6 +17,14 @@ public:
     }
 
 private:
+    void start_perception()
+    {
+        auto client = this->create_client<custom_msgs::srv::StartPerception>("start_perception");
+        auto request = std::make_shared<custom_msgs::srv::StartPerception::Request>();
+        request->start = true;
+        auto request = std::make_shared<custom_msgs::srv::StartPerception::Request>();
+        request->start = start_value;
+    }
     void topic_callback(const custom_msgs::msg::Command &msg) const
     {
 
