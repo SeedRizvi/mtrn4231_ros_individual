@@ -3,7 +3,7 @@
 <package format="3">
   <name>custom_msgs</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
+  <description>Defines the required custom message types</description>
   <maintainer email="syedasadrazarizvi1@gmail.com">asad</maintainer>
   <license>Apache-2.0</license>
 
