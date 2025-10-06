@@ -1,0 +1,83 @@
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#f5f5f5"/>
+
+  <rect width="800" height="80" fill="#2c3e50"/>
+  <text x="400" y="35" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white" text-anchor="middle">Apple Picking Robot</text>
+  <text x="400" y="60" font-family="Arial, sans-serif" font-size="16" fill="#ecf0f1" text-anchor="middle">RViz Visualization Interface</text>
+
+  <!-- RViz Main Viewport -->
+  <rect x="40" y="110" width="520" height="380" rx="10" fill="white" stroke="#bdc3c7" stroke-width="2"/>
+  <text x="60" y="140" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#2c3e50">3D Visualization Viewport</text>
+
+  <!-- Placeholder for RViz content -->
+  <rect x="60" y="160" width="480" height="310" rx="5" fill="#ecf0f1" stroke="#95a5a6" stroke-width="1" stroke-dasharray="5,5"/>
+  <text x="300" y="315" font-family="Arial, sans-serif" font-size="18" fill="#7f8c8d" text-anchor="middle">RViz 3D Scene</text>
+
+  <!-- TF2 Tree Visualization -->
+  <rect x="580" y="110" width="180" height="380" rx="10" fill="white" stroke="#bdc3c7" stroke-width="2"/>
+  <text x="600" y="140" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2c3e50">TF2 Tree</text>
+
+  <!-- TF2 Tree Structure -->
+  <g>
+    <!-- Base Link -->
+    <rect x="625" y="170" width="90" height="30" rx="4" fill="#34495e"/>
+    <text x="670" y="190" font-family="Arial, sans-serif" font-size="11" fill="white" text-anchor="middle">base_link</text>
+
+    <!-- Mobile Base -->
+    <rect x="600" y="220" width="80" height="25" rx="3" fill="#3498db"/>
+    <text x="640" y="237" font-family="Arial, sans-serif" font-size="10" fill="white" text-anchor="middle">mobile_base</text>
+
+    <!-- Robot Arm -->
+    <rect x="690" y="220" width="70" height="25" rx="3" fill="#9b59b6"/>
+    <text x="725" y="237" font-family="Arial, sans-serif" font-size="10" fill="white" text-anchor="middle">arm_base</text>
+
+    <!-- Gripper -->
+    <rect x="690" y="260" width="70" height="25" rx="3" fill="#27ae60"/>
+    <text x="725" y="277" font-family="Arial, sans-serif" font-size="10" fill="white" text-anchor="middle">gripper</text>
+
+    <!-- Camera -->
+    <rect x="610" y="300" width="70" height="25" rx="3" fill="#16a085"/>
+    <text x="645" y="317" font-family="Arial, sans-serif" font-size="10" fill="white" text-anchor="middle">camera</text>
+
+    <!-- Apple Marker -->
+    <rect x="600" y="340" width="80" height="25" rx="3" fill="#e74c3c"/>
+    <text x="640" y="357" font-family="Arial, sans-serif" font-size="10" fill="white" text-anchor="middle">apple_marker</text>
+
+    <!-- Basket -->
+    <rect x="690" y="340" width="70" height="25" rx="3" fill="#f39c12"/>
+    <text x="725" y="357" font-family="Arial, sans-serif" font-size="10" fill="white" text-anchor="middle">basket</text>
+
+    <!-- Connection lines -->
+    <line x1="670" y1="200" x2="640" y2="220" stroke="#95a5a6" stroke-width="2"/>
+    <line x1="670" y1="200" x2="725" y2="220" stroke="#95a5a6" stroke-width="2"/>
+    <line x1="725" y1="245" x2="725" y2="260" stroke="#95a5a6" stroke-width="2"/>
+    <line x1="670" y1="200" x2="645" y2="300" stroke="#95a5a6" stroke-width="2"/>
+    <line x1="640" y1="245" x2="640" y2="340" stroke="#95a5a6" stroke-width="2"/>
+    <line x1="725" y1="285" x2="725" y2="340" stroke="#95a5a6" stroke-width="2"/>
+  </g>
+
+  <!-- RViz Controls -->
+  <rect x="40" y="510" width="720" height="70" rx="10" fill="white" stroke="#bdc3c7" stroke-width="2"/>
+  <text x="60" y="535" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2c3e50">Visualization Controls</text>
+
+  <!-- Control buttons -->
+  <g>
+    <rect x="60" y="545" width="100" height="25" rx="4" fill="#3498db" stroke="#2980b9" stroke-width="1" cursor="pointer"/>
+    <text x="110" y="562" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">Reset View</text>
+
+    <rect x="170" y="545" width="100" height="25" rx="4" fill="#27ae60" stroke="#229954" stroke-width="1" cursor="pointer"/>
+    <text x="220" y="562" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">Camera View</text>
+
+    <rect x="280" y="545" width="100" height="25" rx="4" fill="#9b59b6" stroke="#8e44ad" stroke-width="1" cursor="pointer"/>
+    <text x="330" y="562" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">Toggle TF</text>
+
+    <rect x="390" y="545" width="100" height="25" rx="4" fill="#e74c3c" stroke="#c0392b" stroke-width="1" cursor="pointer"/>
+    <text x="440" y="562" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">Clear Markers</text>
+
+    <rect x="500" y="545" width="100" height="25" rx="4" fill="#f39c12" stroke="#d68910" stroke-width="1" cursor="pointer"/>
+    <text x="550" y="562" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">Save Config</text>
+
+    <rect x="610" y="545" width="100" height="25" rx="4" fill="#16a085" stroke="#138d75" stroke-width="1" cursor="pointer"/>
+    <text x="660" y="562" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">Screenshot</text>
+  </g>
+</svg>
