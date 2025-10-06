@@ -41,7 +41,7 @@
     <text x="560" y="317" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="white" text-anchor="middle">E-STOP</text>
   </g>
   
-  <text x="40" y="390" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#2c3e50">Visualization</text>
+  <text x="40" y="390" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#2c3e50">Visualisation</text>
   
   <g id="rviz-button" cursor="pointer">
     <rect x="40" y="410" width="180" height="80" rx="8" fill="#3498db" stroke="#2980b9" stroke-width="2"/>
