@@ -43,7 +43,7 @@ private:
                 args_str += ", ";
             args_str += msg.args[i];
         }
-        RCLCPP_INFO(this->get_logger(), "Supervisor Cmd ID: '%ld', %u args: [%s]", msg.command_id, msg.nargs, args_str.c_str());
+        // RCLCPP_INFO(this->get_logger(), "Supervisor Cmd ID: '%ld', %u args: [%s]", msg.command_id, msg.nargs, args_str.c_str());
         switch (msg.command_id)
         {
         case CMD_INVALID:

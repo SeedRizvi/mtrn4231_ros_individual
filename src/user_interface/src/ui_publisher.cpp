@@ -37,7 +37,7 @@ private:
 				args_str += ", ";
 			args_str += message.args[i];
 		}
-		RCLCPP_INFO(this->get_logger(), "Command: '%ld' '%u' '[%s]'", message.command_id, message.nargs, args_str.c_str());
+		RCLCPP_DEBUG(this->get_logger(), "Command: '%ld' nargs '%u' '[%s]'", message.command_id, message.nargs, args_str.c_str());
 		publisher_->publish(message);
 	}
 	rclcpp::TimerBase::SharedPtr timer_;
