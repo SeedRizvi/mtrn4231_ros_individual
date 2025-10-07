@@ -8,15 +8,21 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
 find_package(custom_msgs REQUIRED)
 find_package(OpenCV REQUIRED)
 
 add_executable(perception_server src/server.cpp)
-ament_target_dependencies(perception_server rclcpp custom_msgs)
+ament_target_dependencies(perception_server rclcpp geometry_msgs custom_msgs)
 target_link_libraries(perception_server ${OpenCV_LIBS})
+
+add_executable(apple_data_transfer src/apple_data_transfer.cpp)
+ament_target_dependencies(apple_data_transfer rclcpp std_msgs geometry_msgs custom_msgs)
 
 install(TARGETS
   perception_server
+  apple_data_transfer
   DESTINATION lib/${PROJECT_NAME})
 
 if(BUILD_TESTING)

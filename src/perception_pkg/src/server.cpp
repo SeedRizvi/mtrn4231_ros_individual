@@ -1,10 +1,15 @@
 #include "rclcpp/rclcpp.hpp"
 #include "custom_msgs/srv/start_perception.hpp"
+#include "custom_msgs/msg/apple_img_pos_data.hpp"
+#include "geometry_msgs/msg/point.hpp"
 
 #include <memory>
 #include <opencv2/opencv.hpp>
 #include <vector>
 #include <iostream>
+
+// Global publisher for apple detection data
+rclcpp::Publisher<custom_msgs::msg::AppleImgPosData>::SharedPtr apple_detection_publisher;
 
 void start_perception(const std::shared_ptr<custom_msgs::srv::StartPerception::Request> request,
                       std::shared_ptr<custom_msgs::srv::StartPerception::Response> response)
@@ -59,6 +64,12 @@ void perform_cv()
 
     RCLCPP_INFO(rclcpp::get_logger("rclcpp"), "Found %ld potential apples", contours.size());
 
+    // Create message for publishing apple detections
+    auto detection_msg = std::make_shared<custom_msgs::msg::AppleImgPosData>();
+    // detection_msg->header.stamp = rclcpp::Clock().now();
+    // detection_msg->header.frame_id = "camera_optical_frame";
+    detection_msg->count = 0;
+
     int apple_count = 0;
     for (size_t i = 0; i < contours.size(); i++)
     {
@@ -75,10 +86,26 @@ void perform_cv()
             cv::circle(image, cv::Point(center_x, center_y), 5, cv::Scalar(255, 0, 225), -1);
             cv::circle(image, cv::Point(center_x, center_y), 20, cv::Scalar(255, 0, 225), 2);
 
+            // Add apple position to message (convert pixel coordinates to 3D points)
+            geometry_msgs::msg::Point apple_point;
+            apple_point.x = static_cast<double>(center_x);
+            apple_point.y = static_cast<double>(center_y);
+            apple_point.z = 0.0; // Assuming 2D image, set z to 0
+            detection_msg->detections.push_back(apple_point);
+
             ++apple_count;
-            // RCLCPP_INFO(rclcpp::get_logger("rclcpp"), "Apple %d: Center at (%d, %d), Area: %.2f",
-            //             apple_count, center_x, center_y, area);
+            RCLCPP_INFO(rclcpp::get_logger("rclcpp"), "Apple %d: Center at (%d, %d), Area: %.2f",
+                        apple_count, center_x, center_y, area);
         }
+    }
+
+    // Update count and publish detection message
+    detection_msg->count = apple_count;
+
+    if (apple_detection_publisher && apple_count > 0)
+    {
+        apple_detection_publisher->publish(*detection_msg);
+        RCLCPP_INFO(rclcpp::get_logger("rclcpp"), "Published %d apple detections to apple_detections_raw topic", apple_count);
     }
 
     // Save the result image
@@ -93,6 +120,9 @@ int main(int argc, char **argv)
     rclcpp::init(argc, argv);
 
     std::shared_ptr<rclcpp::Node> node = rclcpp::Node::make_shared("start_perception_server");
+
+    // Create publisher for apple detection data
+    apple_detection_publisher = node->create_publisher<custom_msgs::msg::AppleImgPosData>("apple_detections_raw", 10);
 
     rclcpp::Service<custom_msgs::srv::StartPerception>::SharedPtr service =
         node->create_service<custom_msgs::srv::StartPerception>("start_perception", &start_perception);
