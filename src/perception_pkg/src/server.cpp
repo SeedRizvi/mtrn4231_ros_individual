@@ -11,20 +11,14 @@
 // Global publisher for apple detection data
 rclcpp::Publisher<custom_msgs::msg::AppleImgPosData>::SharedPtr apple_detection_publisher;
 
-void start_perception(const std::shared_ptr<custom_msgs::srv::StartPerception::Request> request,
-                      std::shared_ptr<custom_msgs::srv::StartPerception::Response> response)
-{
-    response->success = (request->start) ? true : false;
-    response->message = "Perception service started";
-    RCLCPP_INFO(rclcpp::get_logger("rclcpp"), "Incoming request: start=%d",
-                request->start);
-    RCLCPP_INFO(rclcpp::get_logger("rclcpp"), "sending back response: [%d]", response->success);
-}
+const std::string image_path = "src/perception_pkg/src/";
+
+const std::string image_name = "orchard.png";
+// const std::string image_name = "orchard2.jpg";
+// const std::string image_name = "orchard3.jpg"; // Harder example due to lighting
 
 void perform_cv()
 {
-    std::string image_path = "src/perception_pkg/src/";
-    std::string image_name = "orchard.png";
     std::string full_image_path = image_path + image_name;
     RCLCPP_INFO(rclcpp::get_logger("rclcpp"), "Loading image from: %s", full_image_path.c_str());
 
@@ -64,10 +58,7 @@ void perform_cv()
 
     RCLCPP_INFO(rclcpp::get_logger("rclcpp"), "Found %ld potential apples", contours.size());
 
-    // Create message for publishing apple detections
     auto detection_msg = std::make_shared<custom_msgs::msg::AppleImgPosData>();
-    // detection_msg->header.stamp = rclcpp::Clock().now();
-    // detection_msg->header.frame_id = "camera_optical_frame";
     detection_msg->count = 0;
 
     int apple_count = 0;
@@ -78,7 +69,6 @@ void perform_cv()
         // Filter out very small or very large apples
         if (area > 25 && area < 10000)
         {
-            // Calculate moments to find center of mass
             cv::Moments moments = cv::moments(contours[i]);
             int center_x = moments.m10 / moments.m00;
             int center_y = moments.m01 / moments.m00;
@@ -86,20 +76,18 @@ void perform_cv()
             cv::circle(image, cv::Point(center_x, center_y), 5, cv::Scalar(255, 0, 225), -1);
             cv::circle(image, cv::Point(center_x, center_y), 20, cv::Scalar(255, 0, 225), 2);
 
-            // Add apple position to message (convert pixel coordinates to 3D points)
             geometry_msgs::msg::Point apple_point;
             apple_point.x = static_cast<double>(center_x);
             apple_point.y = static_cast<double>(center_y);
-            apple_point.z = 0.0; // Assuming 2D image, set z to 0
+            apple_point.z = 0.0; // Assuming 2D image
             detection_msg->detections.push_back(apple_point);
 
             ++apple_count;
-            RCLCPP_INFO(rclcpp::get_logger("rclcpp"), "Apple %d: Center at (%d, %d), Area: %.2f",
-                        apple_count, center_x, center_y, area);
+            // RCLCPP_INFO(rclcpp::get_logger("rclcpp"), "Apple %d: Center at (%d, %d), Area: %.2f",
+            //             apple_count, center_x, center_y, area);
         }
     }
 
-    // Update count and publish detection message
     detection_msg->count = apple_count;
 
     if (apple_detection_publisher && apple_count > 0)
@@ -108,11 +96,21 @@ void perform_cv()
         RCLCPP_INFO(rclcpp::get_logger("rclcpp"), "Published %d apple detections to apple_detections_raw topic", apple_count);
     }
 
-    // Save the result image
     std::string output_name = "marked_orchard.png";
     std::string full_output_path = image_path + output_name;
     cv::imwrite(full_output_path, image);
     RCLCPP_INFO(rclcpp::get_logger("rclcpp"), "Detected %d apples total. Result saved to %s", apple_count, full_output_path.c_str());
+}
+
+void start_perception(const std::shared_ptr<custom_msgs::srv::StartPerception::Request> request,
+                      std::shared_ptr<custom_msgs::srv::StartPerception::Response> response)
+{
+    response->success = (request->start) ? true : false;
+    response->message = "Perception service started";
+    RCLCPP_INFO(rclcpp::get_logger("rclcpp"), "Incoming perception service request: start=%d",
+                request->start);
+
+    perform_cv();
 }
 
 int main(int argc, char **argv)
@@ -128,8 +126,6 @@ int main(int argc, char **argv)
         node->create_service<custom_msgs::srv::StartPerception>("start_perception", &start_perception);
 
     RCLCPP_INFO(rclcpp::get_logger("rclcpp"), "Ready to start perception.");
-
-    perform_cv();
 
     rclcpp::spin(node);
     rclcpp::shutdown();
