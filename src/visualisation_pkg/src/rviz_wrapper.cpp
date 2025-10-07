@@ -80,7 +80,7 @@ private:
         // Publish the marker array
         marker_publisher_->publish(*marker_array);
         // ! Needs to sleep otherwise Rviz doesn't pick it up
-        rclcpp::sleep_for(std::chrono::milliseconds(150));
+        rclcpp::sleep_for(std::chrono::milliseconds(500));
         RCLCPP_INFO(this->get_logger(), "Published %d apple markers to RViz",
                     static_cast<int>(marker_array->markers.size()));
     }
