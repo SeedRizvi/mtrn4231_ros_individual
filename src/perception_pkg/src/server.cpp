@@ -13,9 +13,10 @@ rclcpp::Publisher<custom_msgs::msg::AppleImgPosData>::SharedPtr apple_detection_
 
 const std::string image_path = "src/perception_pkg/src/";
 
-const std::string image_name = "orchard.png";
+// const std::string image_name = "orchard.png";
 // const std::string image_name = "orchard2.jpg";
 // const std::string image_name = "orchard3.jpg"; // Harder example due to lighting
+const std::string image_name = "oranges.jpg";
 
 void perform_cv()
 {
