@@ -9,9 +9,11 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(custom_msgs REQUIRED)
+find_package(OpenCV REQUIRED)
 
 add_executable(perception_server src/server.cpp)
 ament_target_dependencies(perception_server rclcpp custom_msgs)
+target_link_libraries(perception_server ${OpenCV_LIBS})
 
 install(TARGETS
   perception_server
