@@ -13,6 +13,11 @@ void start_perception(const std::shared_ptr<custom_msgs::srv::StartPerception::R
     RCLCPP_INFO(rclcpp::get_logger("rclcpp"), "sending back response: [%d]", response->success);
 }
 
+void perform_cv()
+{
+    // TODO
+}
+
 int main(int argc, char **argv)
 {
     rclcpp::init(argc, argv);
