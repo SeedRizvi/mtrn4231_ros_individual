@@ -19,13 +19,21 @@ public:
 private:
     void start_perception()
     {
+        if (perception_started_)
+        {
+            return;
+        }
         auto client = this->create_client<custom_msgs::srv::StartPerception>("start_perception");
         auto request = std::make_shared<custom_msgs::srv::StartPerception::Request>();
         request->start = true;
-        auto request = std::make_shared<custom_msgs::srv::StartPerception::Request>();
-        request->start = start_value;
+
+        client->wait_for_service();
+
+        auto result = client->async_send_request(request);
+        perception_started_ = true;
     }
-    void topic_callback(const custom_msgs::msg::Command &msg) const
+
+    void topic_callback(const custom_msgs::msg::Command &msg)
     {
 
         std::string args_str;
@@ -46,6 +54,7 @@ private:
             break;
         case CMD_START:
             RCLCPP_INFO(this->get_logger(), "Start command received");
+            this->start_perception();
             break;
         case CMD_STOP:
             RCLCPP_INFO(this->get_logger(), "Stop command received");
@@ -58,7 +67,9 @@ private:
             break;
         }
     }
+
     rclcpp::Subscription<custom_msgs::msg::Command>::SharedPtr subscription_;
+    bool perception_started_ = false;
 };
 
 int main(int argc, char *argv[])
