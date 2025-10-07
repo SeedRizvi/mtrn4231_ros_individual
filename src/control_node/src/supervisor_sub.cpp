@@ -33,6 +33,22 @@ private:
         perception_started_ = true;
     }
 
+    void stop_perception()
+    {
+        if (!perception_started_)
+        {
+            return;
+        }
+        auto client = this->create_client<custom_msgs::srv::StartPerception>("start_perception");
+        auto request = std::make_shared<custom_msgs::srv::StartPerception::Request>();
+        request->start = false;
+
+        client->wait_for_service();
+
+        auto result = client->async_send_request(request);
+        perception_started_ = false;
+    }
+
     void topic_callback(const custom_msgs::msg::Command &msg)
     {
 
@@ -58,6 +74,7 @@ private:
             break;
         case CMD_STOP:
             RCLCPP_INFO(this->get_logger(), "Stop command received");
+            this->stop_perception();
             break;
         case CMD_SHUTDOWN:
             RCLCPP_INFO(this->get_logger(), "Shutdown command received");
