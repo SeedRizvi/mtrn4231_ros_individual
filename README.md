@@ -1,14 +1,21 @@
 ## Totally detailed description
 Individual ROS2 Architecture Design + Node Implementations for Mobile, Apple-picking robot
 
+
+## Usage
+
+```
+colcon build && source install/setup.bash
+
+ros2 launch launch/apple_picker_launch.py
+```
+
+
 ## Dependencies
 OpenCV C++ for Perception.
 
 `sudo apt install ros-humble-vision-opencv ros-humble-cv-bridge libopencv-dev`
 
-## Usage
-
-`colcon build && ros2 launch launch/apple_picker_launch.py`
 
 ### Running user interface package
 
